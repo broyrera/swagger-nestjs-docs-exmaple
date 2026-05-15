@@ -3,18 +3,17 @@ import {
   ApiBearerAuth,
   ApiBody,
   ApiConflictResponse,
-  ApiCreatedResponse,
-  ApiOkResponse,
   ApiOperation,
   ApiUnauthorizedResponse,
 } from '@nestjs/swagger';
 import { ApiValidationErrorResponse } from '../../../common/decorators/api-error-responses.decorator';
+import { ApiSuccessResponse } from '../../../common/decorators/api-success-response.decorator';
 import { ErrorResponseDto } from '../../../common/dto/error-response.dto';
-import { CurrentUserResponseDto } from '../dto/current-user-response.dto';
+import { CurrentUserResponseDataDto } from '../dto/current-user-response.dto';
 import { LoginRequestDto } from '../dto/login-request.dto';
-import { LoginResponseDto } from '../dto/login-response.dto';
+import { LoginResponseDataDto } from '../dto/login-response.dto';
 import { RegisterRequestDto } from '../dto/register-request.dto';
-import { RegisterResponseDto } from '../dto/register-response.dto';
+import { RegisterResponseDataDto } from '../dto/register-response.dto';
 
 export function RegisterApiDocs() {
   return applyDecorators(
@@ -24,9 +23,10 @@ export function RegisterApiDocs() {
         'Creates a new user account that can manage organizations and competitions.',
     }),
     ApiBody({ type: RegisterRequestDto }),
-    ApiCreatedResponse({
+    ApiSuccessResponse({
+      status: 201,
       description: 'User registered successfully',
-      type: RegisterResponseDto,
+      dataType: RegisterResponseDataDto,
     }),
     ApiValidationErrorResponse(),
     ApiConflictResponse({
@@ -43,9 +43,10 @@ export function LoginApiDocs() {
       description: 'Authenticates a user and returns an access token.',
     }),
     ApiBody({ type: LoginRequestDto }),
-    ApiOkResponse({
+    ApiSuccessResponse({
+      status: 200,
       description: 'User logged in successfully',
-      type: LoginResponseDto,
+      dataType: LoginResponseDataDto,
     }),
     ApiValidationErrorResponse(),
     ApiUnauthorizedResponse({
@@ -62,9 +63,10 @@ export function GetCurrentUserApiDocs() {
       summary: 'Get current authenticated user',
       description: 'Returns the current authenticated user profile.',
     }),
-    ApiOkResponse({
+    ApiSuccessResponse({
+      status: 200,
       description: 'Current user retrieved successfully',
-      type: CurrentUserResponseDto,
+      dataType: CurrentUserResponseDataDto,
     }),
     ApiUnauthorizedResponse({
       description: 'Authentication is required or token is invalid',
