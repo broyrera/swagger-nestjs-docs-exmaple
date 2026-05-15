@@ -78,6 +78,53 @@ Example:
 }
 ```
 
+## Data Shape Rule
+
+For single-resource responses, `data` should contain the resource object directly.
+
+Good:
+
+```json
+{
+  "success": true,
+  "message": "Organization created successfully",
+  "data": {
+    "id": "org_123",
+    "name": "Garuda Sports Community"
+  }
+}
+```
+
+Avoid unnecessary nested resource wrappers:
+
+```json
+{
+  "success": true,
+  "message": "Organization created successfully",
+  "data": {
+    "organization": {
+      "id": "org_123",
+      "name": "Garuda Sports Community"
+    }
+  }
+}
+```
+
+Nested objects inside `data` are allowed only when the response naturally contains multiple named resources or computed context.
+
+Example:
+
+```json
+{
+  "success": true,
+  "message": "Match score updated successfully",
+  "data": {
+    "match": {},
+    "standingUpdated": true
+  }
+}
+```
+
 ## Field Rules
 
 ### success

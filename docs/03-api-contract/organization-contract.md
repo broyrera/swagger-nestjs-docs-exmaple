@@ -66,12 +66,10 @@ Response body:
   "success": true,
   "message": "Organization created successfully",
   "data": {
-    "organization": {
-      "id": "org_123",
-      "name": "Garuda Sports Community",
-      "description": "Community for sport and esport events.",
-      "currentUserRole": "ORGANIZATION_OWNER"
-    }
+    "id": "org_123",
+    "name": "Garuda Sports Community",
+    "description": "Community for sport and esport events.",
+    "currentUserRole": "ORGANIZATION_OWNER"
   }
 }
 ```
@@ -155,12 +153,10 @@ Response body:
   "success": true,
   "message": "Organization retrieved successfully",
   "data": {
-    "organization": {
-      "id": "org_123",
-      "name": "Garuda Sports Community",
-      "description": "Community for sport and esport events.",
-      "currentUserRole": "ORGANIZATION_OWNER"
-    }
+    "id": "org_123",
+    "name": "Garuda Sports Community",
+    "description": "Community for sport and esport events.",
+    "currentUserRole": "ORGANIZATION_OWNER"
   }
 }
 ```
@@ -238,12 +234,10 @@ Response body:
   "success": true,
   "message": "Organization member added successfully",
   "data": {
-    "member": {
-      "id": "mem_123",
-      "userId": "usr_456",
-      "email": "member@example.com",
-      "role": "ORGANIZATION_ADMIN"
-    }
+    "id": "mem_123",
+    "userId": "usr_456",
+    "email": "member@example.com",
+    "role": "ORGANIZATION_ADMIN"
   }
 }
 ```
