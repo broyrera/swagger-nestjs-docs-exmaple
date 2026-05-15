@@ -93,14 +93,16 @@ docs/
 Current sprint:
 
 ```txt
-Sprint 1: Authentication API Contract
+Sprint 8: API Contract Review and Swagger Quality Gate
 ```
 
-Sprint 1 focuses on:
+Sprint 8 focuses on:
 
-- `POST /api/v1/auth/register`
-- `POST /api/v1/auth/login`
-- `GET /api/v1/auth/me`
+- API contract review checklist
+- Swagger quality rules
+- OpenAPI export guide
+- response and error convention verification
+- auth and RBAC documentation verification
 
 ## API Contract Source of Truth
 
@@ -134,6 +136,13 @@ Current status:
 
 - Product documentation: started
 - Domain documentation: started
-- Scrum documentation: started
+- Scrum documentation: Sprint 8
 - API contract standard: started
-- NestJS implementation: not started yet
+- Auth API contract stub: done
+- Organization API contract stub: done
+- Competition API contract stub: done
+- Participant API contract stub: done
+- Match API contract stub: done
+- Standings API contract stub: done
+- Bracket API contract stub: done
+- NestJS implementation: contract stubs only
