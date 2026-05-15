@@ -149,3 +149,110 @@ Participants retrieved successfully
 Match score updated successfully
 Competition published successfully
 ```
+
+---
+
+## Swagger Response Wrapper Pattern
+
+The API uses a reusable success response wrapper.
+
+Every success response should follow this shape:
+
+```json
+{
+  "success": true,
+  "message": "Request completed successfully",
+  "data": {}
+}
+```
+
+However, individual response DTOs should not repeat `success`, `message`, and `data` for every endpoint.
+
+Instead, each endpoint should define only the data payload DTO.
+
+Example:
+
+```ts
+export class LoginResponseDataDto {
+  @ApiProperty({
+    description: 'JWT access token.',
+    example: 'jwt-access-token',
+  })
+  accessToken: string;
+
+  @ApiProperty({
+    description: 'Authenticated user profile.',
+    type: UserProfileDto,
+  })
+  user: UserProfileDto;
+}
+```
+
+The response wrapper is documented using a reusable Swagger decorator:
+
+```ts
+ApiSuccessResponse({
+  status: 200,
+  description: 'User logged in successfully',
+  dataType: LoginResponseDataDto,
+})
+```
+
+This generates a Swagger response schema with:
+
+* `success`
+* `message`
+* `data`
+
+while keeping module-specific DTOs focused only on the actual response payload.
+
+## Why This Pattern Exists
+
+TypeScript generics are useful in code, but Swagger/OpenAPI cannot always infer generic response types at runtime.
+
+Avoid this pattern for Swagger documentation:
+
+```ts
+class LoginResponseDto extends ApiResponseDto<LoginResponseDataDto> {}
+```
+
+Preferred pattern:
+
+```ts
+ApiSuccessResponse({
+  description: 'User logged in successfully',
+  dataType: LoginResponseDataDto,
+})
+```
+
+The reusable decorator internally uses:
+
+* `ApiExtraModels`
+* `getSchemaPath`
+* `allOf`
+
+to produce a clear OpenAPI schema.
+
+## Response DTO Naming
+
+Use this naming pattern:
+
+```txt
+{Action}{Resource}ResponseDataDto
+```
+
+Examples:
+
+```txt
+RegisterResponseDataDto
+LoginResponseDataDto
+CurrentUserResponseDataDto
+CreateCompetitionResponseDataDto
+GetStandingsResponseDataDto
+```
+
+## Rule
+
+Module response DTOs should only describe the `data` object.
+
+The common response wrapper is handled by shared Swagger decorators.

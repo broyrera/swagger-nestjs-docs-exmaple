@@ -184,6 +184,54 @@ Avoid:
 @ApiOkResponse()
 ```
 
+---
+
+## Success Response Documentation Pattern
+
+Use `ApiSuccessResponse` for success responses.
+
+Good:
+
+```ts
+ApiSuccessResponse({
+  status: 201,
+  description: 'User registered successfully',
+  dataType: RegisterResponseDataDto,
+})
+```
+
+Avoid repeating full response wrappers in every module DTO.
+
+Avoid:
+
+```ts
+export class RegisterResponseDto {
+  success: boolean;
+  message: string;
+  data: RegisterResponseDataDto;
+}
+```
+
+Preferred:
+
+```ts
+export class RegisterResponseDataDto {
+  user: UserProfileDto;
+}
+```
+
+Then document the wrapper using:
+
+```ts
+ApiSuccessResponse({
+  status: 201,
+  description: 'User registered successfully',
+  dataType: RegisterResponseDataDto,
+})
+```
+
+This keeps controller documentation clean and keeps DTOs focused.
+
 ## Error Documentation
 
 Document expected error responses.
