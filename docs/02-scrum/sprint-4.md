@@ -134,6 +134,30 @@ Acceptance criteria:
 * Participant list query DTO
 * Reusable Swagger decorators for participant endpoints
 
+## Module Stub Deliverables
+
+After the API contract is documented, this sprint also adds the initial Participants module scaffold:
+
+```txt
+src/modules/participants/
+ ┣ docs/
+ ┃ ┗ participants.swagger.ts
+ ┣ dto/
+ ┃ ┣ participant-type.enum.ts
+ ┃ ┣ participant-status.enum.ts
+ ┃ ┣ participant.dto.ts
+ ┃ ┣ create-participant-request.dto.ts
+ ┃ ┣ update-participant-request.dto.ts
+ ┃ ┗ list-participants-query.dto.ts
+ ┣ participants.controller.ts
+ ┣ participants.module.ts
+ ┗ participants.service.ts
+```
+
+The module stub should expose the documented participant endpoints with placeholder service responses.
+
+The goal is to make Swagger UI show the contract clearly before persistence and business rules are implemented.
+
 ## Swagger Learning Goals
 
 By the end of this sprint, the project should demonstrate:
