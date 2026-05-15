@@ -9,11 +9,10 @@ import {
 import { ApiValidationErrorResponse } from '../../../common/decorators/api-error-responses.decorator';
 import { ApiSuccessResponse } from '../../../common/decorators/api-success-response.decorator';
 import { ErrorResponseDto } from '../../../common/dto/error-response.dto';
-import { CurrentUserResponseDataDto } from '../dto/current-user-response.dto';
 import { LoginRequestDto } from '../dto/login-request.dto';
 import { LoginResponseDataDto } from '../dto/login-response.dto';
 import { RegisterRequestDto } from '../dto/register-request.dto';
-import { RegisterResponseDataDto } from '../dto/register-response.dto';
+import { UserProfileDto } from '../dto/user-profile.dto';
 
 export function RegisterApiDocs() {
   return applyDecorators(
@@ -26,7 +25,7 @@ export function RegisterApiDocs() {
     ApiSuccessResponse({
       status: 201,
       description: 'User registered successfully',
-      dataType: RegisterResponseDataDto,
+      dataType: UserProfileDto,
     }),
     ApiValidationErrorResponse(),
     ApiConflictResponse({
@@ -66,7 +65,7 @@ export function GetCurrentUserApiDocs() {
     ApiSuccessResponse({
       status: 200,
       description: 'Current user retrieved successfully',
-      dataType: CurrentUserResponseDataDto,
+      dataType: UserProfileDto,
     }),
     ApiUnauthorizedResponse({
       description: 'Authentication is required or token is invalid',

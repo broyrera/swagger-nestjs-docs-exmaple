@@ -77,12 +77,10 @@ Response body:
   "success": true,
   "message": "User registered successfully",
   "data": {
-    "user": {
-      "id": "usr_123",
-      "name": "Suci Nurul Ilham",
-      "email": "suci@example.com",
-      "role": "USER"
-    }
+    "id": "usr_123",
+    "name": "Suci Nurul Ilham",
+    "email": "suci@example.com",
+    "role": "USER"
   }
 }
 ```
@@ -244,12 +242,10 @@ Response body:
   "success": true,
   "message": "Current user retrieved successfully",
   "data": {
-    "user": {
-      "id": "usr_123",
-      "name": "Suci Nurul Ilham",
-      "email": "suci@example.com",
-      "role": "USER"
-    }
+    "id": "usr_123",
+    "name": "Suci Nurul Ilham",
+    "email": "suci@example.com",
+    "role": "USER"
   }
 }
 ```
