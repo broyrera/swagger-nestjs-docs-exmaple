@@ -4,7 +4,7 @@ import { ListResultsQueryDto } from './dto/list-results-query.dto';
 
 @Injectable()
 export class StandingsService {
-  getStandings(competitionId: string) {
+  getStandings(_competitionId: string) {
     return {
       success: true,
       message: 'Standings retrieved successfully',
