@@ -1,0 +1,21 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: lawan-pmo-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: lawanpmo
+      POSTGRES_PASSWORD: lawanpmo
+      POSTGRES_DB: lawan_pmo_sports
+    ports:
+      - "5433:5432"
+    volumes:
+      - lawan_pmo_postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U lawanpmo -d lawan_pmo_sports"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  lawan_pmo_postgres_data:

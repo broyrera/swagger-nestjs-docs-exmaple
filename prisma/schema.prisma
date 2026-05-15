@@ -1,0 +1,256 @@
+// Prisma schema for Lawan PMO Sports.
+// IDs are NOT given a @default here — the Prisma client extension at
+// src/common/prisma/auto-id.extension.ts injects prefixed IDs on create.
+// See sprint-9.md (Story 9.5) for the rationale.
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ─── Enums ───────────────────────────────────────────────────────────────
+// Keep these in sync with src/modules/*/dto/*.enum.ts.
+
+enum GlobalUserRole {
+  SUPER_ADMIN
+  USER
+}
+
+enum OrganizationRole {
+  ORGANIZATION_OWNER
+  ORGANIZATION_ADMIN
+  ORGANIZATION_MEMBER
+}
+
+enum CompetitionRole {
+  COMPETITION_OWNER
+  COMPETITION_ADMIN
+  SCORE_ADMIN
+}
+
+enum CompetitionType {
+  SPORT
+  ESPORT
+}
+
+enum CompetitionFormat {
+  SINGLE_MATCH
+  ROUND_ROBIN
+  GROUP_STAGE
+  KNOCKOUT
+  GROUP_STAGE_KNOCKOUT
+  LEAGUE
+  TWO_LEGGED_TIE
+}
+
+enum CompetitionVisibility {
+  PUBLIC
+  PRIVATE
+}
+
+enum CompetitionStatus {
+  DRAFT
+  PUBLISHED
+  ARCHIVED
+}
+
+enum ParticipantType {
+  INDIVIDUAL
+  TEAM
+}
+
+enum ParticipantStatus {
+  PENDING
+  APPROVED
+  REJECTED
+  REMOVED
+}
+
+enum MatchStatus {
+  SCHEDULED
+  ONGOING
+  COMPLETED
+  DISPUTED
+  CANCELLED
+}
+
+enum BracketGenerationMode {
+  AUTO
+  MANUAL
+}
+
+enum BracketMatchStatus {
+  SCHEDULED
+  COMPLETED
+  BYE
+}
+
+// ─── Models ──────────────────────────────────────────────────────────────
+
+model User {
+  id           String         @id
+  name         String
+  email        String         @unique
+  passwordHash String
+  role         GlobalUserRole @default(USER)
+  createdAt    DateTime       @default(now())
+  updatedAt    DateTime       @updatedAt
+
+  ownedOrganizations    Organization[]              @relation("OrganizationOwner")
+  organizationMemberships OrganizationMember[]
+  competitionRoles      CompetitionRoleAssignment[]
+  linkedParticipants    Participant[]               @relation("ParticipantLinkedUser")
+}
+
+model Organization {
+  id          String   @id
+  name        String
+  description String?
+  ownerId     String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  owner        User                 @relation("OrganizationOwner", fields: [ownerId], references: [id])
+  members      OrganizationMember[]
+  competitions Competition[]
+
+  @@index([ownerId])
+}
+
+model OrganizationMember {
+  id             String           @id
+  organizationId String
+  userId         String
+  role           OrganizationRole
+  createdAt      DateTime         @default(now())
+  updatedAt      DateTime         @updatedAt
+
+  organization Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  user         User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([organizationId, userId])
+  @@index([userId])
+}
+
+model Competition {
+  id             String                @id
+  organizationId String
+  name           String
+  description    String?
+  type           CompetitionType
+  format         CompetitionFormat
+  visibility     CompetitionVisibility
+  status         CompetitionStatus     @default(DRAFT)
+  createdAt      DateTime              @default(now())
+  updatedAt      DateTime              @updatedAt
+
+  organization     Organization                @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  roleAssignments  CompetitionRoleAssignment[]
+  participants     Participant[]
+  matches          Match[]
+  bracketRounds    BracketRound[]
+
+  @@index([organizationId])
+  @@index([status])
+}
+
+model CompetitionRoleAssignment {
+  id            String          @id
+  competitionId String
+  userId        String
+  role          CompetitionRole
+  createdAt     DateTime        @default(now())
+  updatedAt     DateTime        @updatedAt
+
+  competition Competition @relation(fields: [competitionId], references: [id], onDelete: Cascade)
+  user        User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([competitionId, userId, role])
+  @@index([userId])
+}
+
+model Participant {
+  id            String            @id
+  competitionId String
+  type          ParticipantType
+  displayName   String
+  status        ParticipantStatus @default(PENDING)
+  linkedUserId  String?
+  createdAt     DateTime          @default(now())
+  updatedAt     DateTime          @updatedAt
+
+  competition  Competition    @relation(fields: [competitionId], references: [id], onDelete: Cascade)
+  linkedUser   User?          @relation("ParticipantLinkedUser", fields: [linkedUserId], references: [id], onDelete: SetNull)
+  homeMatches  Match[]        @relation("MatchHomeParticipant")
+  awayMatches  Match[]        @relation("MatchAwayParticipant")
+  homeBracket  BracketMatch[] @relation("BracketHomeParticipant")
+  awayBracket  BracketMatch[] @relation("BracketAwayParticipant")
+  wonBracket   BracketMatch[] @relation("BracketWinnerParticipant")
+
+  @@index([competitionId])
+  @@index([status])
+  @@index([linkedUserId])
+}
+
+model Match {
+  id                  String      @id
+  competitionId       String
+  homeParticipantId   String
+  awayParticipantId   String
+  scheduledAt         DateTime?
+  status              MatchStatus @default(SCHEDULED)
+  homeScore           Int?
+  awayScore           Int?
+  createdAt           DateTime    @default(now())
+  updatedAt           DateTime    @updatedAt
+
+  competition       Competition    @relation(fields: [competitionId], references: [id], onDelete: Cascade)
+  homeParticipant   Participant    @relation("MatchHomeParticipant", fields: [homeParticipantId], references: [id], onDelete: Restrict)
+  awayParticipant   Participant    @relation("MatchAwayParticipant", fields: [awayParticipantId], references: [id], onDelete: Restrict)
+  bracketMatches    BracketMatch[]
+
+  @@index([competitionId])
+  @@index([status])
+  @@index([homeParticipantId])
+  @@index([awayParticipantId])
+}
+
+model BracketRound {
+  id            String   @id
+  competitionId String
+  roundNumber   Int
+  label         String?
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  competition    Competition    @relation(fields: [competitionId], references: [id], onDelete: Cascade)
+  bracketMatches BracketMatch[]
+
+  @@unique([competitionId, roundNumber])
+}
+
+model BracketMatch {
+  id                  String             @id
+  bracketRoundId      String
+  slotIndex           Int
+  homeParticipantId   String?
+  awayParticipantId   String?
+  winnerParticipantId String?
+  matchId             String?
+  status              BracketMatchStatus @default(SCHEDULED)
+  createdAt           DateTime           @default(now())
+  updatedAt           DateTime           @updatedAt
+
+  bracketRound        BracketRound  @relation(fields: [bracketRoundId], references: [id], onDelete: Cascade)
+  homeParticipant     Participant?  @relation("BracketHomeParticipant", fields: [homeParticipantId], references: [id], onDelete: SetNull)
+  awayParticipant     Participant?  @relation("BracketAwayParticipant", fields: [awayParticipantId], references: [id], onDelete: SetNull)
+  winnerParticipant   Participant?  @relation("BracketWinnerParticipant", fields: [winnerParticipantId], references: [id], onDelete: SetNull)
+  match               Match?        @relation(fields: [matchId], references: [id], onDelete: SetNull)
+
+  @@unique([bracketRoundId, slotIndex])
+  @@index([matchId])
+}

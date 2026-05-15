@@ -138,7 +138,7 @@ so that any module can inject it and start replacing stub logic.
 
 Acceptance criteria:
 
-- `PrismaService` extends `PrismaClient` and implements `OnModuleInit` / `OnModuleDestroy`.
+- `PrismaService` uses composition — it holds a `PrismaClient` and exposes the extended client as a public readonly `db` property. Implements `OnModuleInit` (connect) and `OnModuleDestroy` (disconnect).
 - A `PrismaModule` exports the service globally (via `@Global()`).
 - Importing `PrismaModule` once in `AppModule` makes the service available everywhere.
 - Existing controllers/services still build and Swagger UI still loads.
@@ -155,19 +155,21 @@ Acceptance criteria:
 - The generated migration is committed under `prisma/migrations/`.
 - `prisma migrate status` reports the migration as applied.
 
-### Story 9.5: ID prefix helper exists
+### Story 9.5: ID prefix is enforced by a Prisma client extension
 
 As a backend developer,
-I want a single helper for generating prefixed IDs,
-so that all entities follow the `prefix_<cuid>` convention.
+I want prefixed IDs to be applied automatically at the persistence layer,
+so that no service can accidentally create a row without the correct prefix.
 
 Acceptance criteria:
 
-- `src/common/ids/generate-id.ts` exports `generateId(prefix: IdPrefix)`.
-- `IdPrefix` is a typed enum/union of valid prefixes (`usr`, `org`, `cmp`, `par`, `mat`, `bm`, `br`, `cra`, `om`).
-- Prisma models use this helper as their `@id` default via `@default(...)` substitute applied in the service layer (Prisma cannot call TS at default-time, so this is enforced via `@default(cuid())` plus a service-layer prefix wrap, or via a small helper invoked before `create`).
+- `src/common/ids/id-prefix.ts` defines `ID_PREFIX_BY_MODEL` (typed map of Prisma model name → prefix string) and exports `IdPrefix` and `ModelName` types.
+- `src/common/ids/generate-id.ts` exports `generateId(prefix: IdPrefix)` using `nanoid` for the suffix.
+- `src/common/prisma/auto-id.extension.ts` defines a Prisma client extension that intercepts `create`, `createMany`, and `upsert` on `$allModels` and injects `id = generateId(prefix)` when not explicitly provided.
+- `schema.prisma` models declare `id String @id` with NO `@default(...)` — the extension is the single source of IDs.
+- Bypassing the extension (e.g. raw SQL or directly using a non-extended `PrismaClient`) will fail at the DB level with a NOT NULL violation. This is intentional safety.
 
-Note: the trade-off between "use plain `cuid()` and prefix in service" vs "always wrap" will be decided during implementation. The ADR for this can be written as follow-up if non-trivial.
+Architecture note: because `$extends` returns a new client type that is not assignable back to `PrismaClient`, `PrismaService` uses **composition** rather than inheritance. The extended client is exposed as a public readonly property (`db`) on the service. Call sites read as `this.prisma.db.user.findMany()`.
 
 ## Deliverables
 
