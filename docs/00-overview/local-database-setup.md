@@ -18,6 +18,16 @@ This guide explains how to run Lawan PMO Sports against a local PostgreSQL datab
 
    The default `DATABASE_URL` points at `localhost:5433`. Host port 5433 is used (not the default 5432) to avoid conflicting with any Postgres already running on the developer machine. The container itself still listens on 5432 internally.
 
+   The `.env` also defines:
+
+   | Var | Purpose |
+   | --- | --- |
+   | `JWT_SECRET` | Signing key for access tokens. **Must be at least 32 characters.** App fails to boot if missing or shorter. Replace the dev placeholder with a random string for any non-local environment. |
+   | `JWT_EXPIRES_IN` | Access token lifetime. Accepts `ms`-style strings (e.g. `1d`, `12h`, `30m`). Default `1d`. |
+   | `PORT` | App listen port. Default `3000`. |
+
+   Env validation runs at boot via [src/common/config/env.validation.ts](../../src/common/config/env.validation.ts). Misconfiguration produces a clear error like `Invalid environment configuration: JWT_SECRET must be at least 32 characters long`.
+
 2. Start the Postgres container:
 
    ```sh
@@ -95,6 +105,36 @@ export class OrganizationsService {
   }
 }
 ```
+
+## Authentication (Sprint 10)
+
+All endpoints except `POST /api/v1/auth/register` and `POST /api/v1/auth/login` require a valid `Authorization: Bearer <jwt>` header. The global `JwtAuthGuard` ([src/common/auth/jwt-auth.guard.ts](../../src/common/auth/jwt-auth.guard.ts)) is registered as `APP_GUARD` in `AppModule`.
+
+To opt-out a new public endpoint, decorate the controller method with `@Public()`:
+
+```ts
+import { Public } from '../../common/auth/public.decorator';
+
+@Public()
+@Get('health')
+health() {
+  return { ok: true };
+}
+```
+
+To read the current authenticated user inside a controller:
+
+```ts
+import { CurrentUser } from '../../common/auth/current-user.decorator';
+import { AuthenticatedUser } from '../../common/auth/jwt-payload.type';
+
+@Get('something')
+doSomething(@CurrentUser() user: AuthenticatedUser) {
+  return this.someService.doSomething(user.id);
+}
+```
+
+JWT payload shape is `{ sub: userId, email, role }` — see [src/common/auth/jwt-payload.type.ts](../../src/common/auth/jwt-payload.type.ts). The role is included so future RBAC checks can run without an extra DB hit.
 
 ## Schema and enum sync
 

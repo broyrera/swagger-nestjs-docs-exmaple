@@ -1,5 +1,8 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Get, HttpCode, HttpStatus, Post } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
+import { CurrentUser } from '../../common/auth/current-user.decorator';
+import { AuthenticatedUser } from '../../common/auth/jwt-payload.type';
+import { Public } from '../../common/auth/public.decorator';
 import {
   GetCurrentUserApiDocs,
   LoginApiDocs,
@@ -15,12 +18,15 @@ export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
   @Post('register')
+  @Public()
   @RegisterApiDocs()
   register(@Body() dto: RegisterRequestDto) {
     return this.authService.register(dto);
   }
 
   @Post('login')
+  @Public()
+  @HttpCode(HttpStatus.OK)
   @LoginApiDocs()
   login(@Body() dto: LoginRequestDto) {
     return this.authService.login(dto);
@@ -28,7 +34,7 @@ export class AuthController {
 
   @Get('me')
   @GetCurrentUserApiDocs()
-  getMe() {
-    return this.authService.getMe();
+  getMe(@CurrentUser() user: AuthenticatedUser) {
+    return this.authService.getMe(user.id);
   }
 }
