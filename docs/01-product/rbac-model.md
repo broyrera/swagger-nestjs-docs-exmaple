@@ -48,9 +48,9 @@ PATCH /competitions/{competitionId}/publish
 
 requires the user to be one of:
 
-* SUPER_ADMIN
-* ORGANIZATION_OWNER
-* COMPETITION_OWNER
+- SUPER_ADMIN
+- ORGANIZATION_OWNER
+- COMPETITION_OWNER
 
 ## Permission Matrix
 
@@ -76,12 +76,12 @@ A competition can be public or private.
 
 Anyone can view:
 
-* competition detail
-* participants
-* matches
-* standings
-* bracket
-* results
+- competition detail
+- participants
+- matches
+- standings
+- bracket
+- results
 
 ### Private Competition
 
@@ -89,19 +89,19 @@ Only authorized users can view the competition.
 
 Private competitions are useful for:
 
-* internal events
-* draft competitions
-* invitation-only tournaments
-* testing before publish
+- internal events
+- draft competitions
+- invitation-only tournaments
+- testing before publish
 
 ## API Contract Impact
 
 Every protected endpoint must document:
 
-* authentication requirement
-* required role
-* possible `401 Unauthorized`
-* possible `403 Forbidden`
+- authentication requirement
+- required role
+- possible `401 Unauthorized`
+- possible `403 Forbidden`
 
 Example Swagger documentation note:
 

@@ -33,11 +33,11 @@ Every participant plays against every other participant.
 
 Useful for:
 
-* small leagues
-* group stage
-* casual competitions
-* badminton groups
-* futsal mini league
+- small leagues
+- group stage
+- casual competitions
+- badminton groups
+- futsal mini league
 
 Example with 4 participants:
 
@@ -58,10 +58,10 @@ Each group usually uses round robin format.
 
 Useful for:
 
-* competitions with many participants
-* esport tournaments
-* school events
-* community tournaments
+- competitions with many participants
+- esport tournaments
+- school events
+- community tournaments
 
 Example:
 
@@ -83,9 +83,9 @@ Participants are eliminated after losing.
 
 Useful for:
 
-* bracket tournaments
-* cup competitions
-* elimination events
+- bracket tournaments
+- cup competitions
+- elimination events
 
 The system should support non-perfect participant counts.
 
@@ -102,10 +102,10 @@ Participants start in groups, then top participants advance to knockout rounds.
 
 Useful for:
 
-* formal tournaments
-* esport events
-* futsal competitions
-* school competitions
+- formal tournaments
+- esport events
+- futsal competitions
+- school competitions
 
 Example:
 
@@ -119,17 +119,17 @@ A long-running competition where participants play multiple matchdays.
 
 Useful for:
 
-* sport leagues
-* office leagues
-* community seasons
-* recurring competitions
+- sport leagues
+- office leagues
+- community seasons
+- recurring competitions
 
 A league may support:
 
-* one round
-* double round
-* home-away matches
-* custom matchdays
+- one round
+- double round
+- home-away matches
+- custom matchdays
 
 ## 7. Two-Legged Tie
 
@@ -139,9 +139,9 @@ The winner is calculated using aggregate score.
 
 Useful for:
 
-* home-away format
-* football-style knockout
-* esport rematch format
+- home-away format
+- football-style knockout
+- esport rematch format
 
 Example:
 
@@ -157,18 +157,18 @@ Team A 3 - 2 Team B
 
 The system must not require participant counts to follow perfect bracket numbers like:
 
-* 4
-* 8
-* 16
-* 32
+- 4
+- 8
+- 16
+- 32
 
 Informal competitions may have:
 
-* 3 participants
-* 5 participants
-* 7 participants
-* 9 participants
-* 13 participants
+- 3 participants
+- 5 participants
+- 7 participants
+- 9 participants
+- 13 participants
 
 The API contract must allow flexible participant counts.
 
@@ -176,12 +176,12 @@ The API contract must allow flexible participant counts.
 
 Organizers should be allowed to manually adjust:
 
-* group assignment
-* match schedule
-* bracket placement
-* score
-* match status
-* participant order
+- group assignment
+- match schedule
+- bracket placement
+- score
+- match status
+- participant order
 
 This is important because real-world competitions often need manual corrections.
 
@@ -216,9 +216,9 @@ TWO_LEGGED_TIE
 
 Future versions may support:
 
-* Swiss format
-* double elimination
-* custom point rules
-* custom tie breaker rules
-* best of series
-* map-based esport scoring
+- Swiss format
+- double elimination
+- custom point rules
+- custom tie breaker rules
+- best of series
+- map-based esport scoring

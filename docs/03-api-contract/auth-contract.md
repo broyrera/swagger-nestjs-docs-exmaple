@@ -286,10 +286,10 @@ Participants do not need accounts and cannot authenticate unless they are linked
 
 The API must never expose:
 
-* password
-* password hash
-* refresh token raw value
-* internal security metadata
+- password
+- password hash
+- refresh token raw value
+- internal security metadata
 
 ## Swagger Documentation Rules
 

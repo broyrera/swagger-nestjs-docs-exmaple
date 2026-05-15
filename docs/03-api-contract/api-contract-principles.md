@@ -70,11 +70,11 @@ Avoid returning raw entities directly from API responses.
 
 Do not expose sensitive fields such as:
 
-* password
-* password hash
-* internal tokens
-* private audit metadata
-* internal system flags
+- password
+- password hash
+- internal tokens
+- private audit metadata
+- internal system flags
 
 ## Error Contract Rules
 
@@ -82,20 +82,20 @@ Errors must follow a consistent structure.
 
 Every protected endpoint should document:
 
-* `401 Unauthorized`
-* `403 Forbidden` when role-based access applies
+- `401 Unauthorized`
+- `403 Forbidden` when role-based access applies
 
 Every endpoint with validation should document:
 
-* `400 Bad Request`
+- `400 Bad Request`
 
 Every endpoint that fetches a resource by ID should document:
 
-* `404 Not Found`
+- `404 Not Found`
 
 Every endpoint with lifecycle or business rule conflict should document:
 
-* `409 Conflict`
+- `409 Conflict`
 
 ## Authentication Documentation
 
@@ -156,11 +156,11 @@ PATCH /api/v1/matches/{matchId}/score
 
 Before an endpoint is considered done, check:
 
-* Does it have a clear request DTO?
-* Does it have a clear response DTO?
-* Are success examples provided where useful?
-* Are validation errors documented?
-* Are auth requirements documented?
-* Are role requirements documented?
-* Are business rule errors documented?
-* Is the controller still readable?
+- Does it have a clear request DTO?
+- Does it have a clear response DTO?
+- Are success examples provided where useful?
+- Are validation errors documented?
+- Are auth requirements documented?
+- Are role requirements documented?
+- Are business rule errors documented?
+- Is the controller still readable?

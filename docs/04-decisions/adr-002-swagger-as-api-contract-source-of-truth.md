@@ -87,18 +87,18 @@ export function LoginApiDocs() {
 
 Every endpoint must document:
 
-* endpoint purpose
-* authentication requirement
-* required role if protected
-* request body
-* path parameters
-* query parameters
-* success response
-* error responses
-* example payload when useful
+- endpoint purpose
+- authentication requirement
+- required role if protected
+- request body
+- path parameters
+- query parameters
+- success response
+- error responses
+- example payload when useful
 
 ## Related Documents
 
-* `docs/03-api-contract/swagger-style-guide.md`
-* `docs/03-api-contract/response-convention.md`
-* `docs/03-api-contract/error-convention.md`
+- `docs/03-api-contract/swagger-style-guide.md`
+- `docs/03-api-contract/response-convention.md`
+- `docs/03-api-contract/error-convention.md`

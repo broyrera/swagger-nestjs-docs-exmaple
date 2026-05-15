@@ -46,9 +46,9 @@ A participant may optionally be linked to a user account.
 
 This is useful when:
 
-* A player wants to manage their own profile.
-* A team manager wants to manage team registration.
-* A participant needs access to private information.
+- A player wants to manage their own profile.
+- A team manager wants to manage team registration.
+- A participant needs access to private information.
 
 Example:
 
@@ -64,24 +64,24 @@ Example:
 
 User:
 
-* Can login
-* Can receive roles
-* Can manage resources
-* Can be audited
+- Can login
+- Can receive roles
+- Can manage resources
+- Can be audited
 
 Participant:
 
-* Appears in competition
-* Appears in bracket
-* Appears in standings
-* May only be a display name
-* Does not need login access
+- Appears in competition
+- Appears in bracket
+- Appears in standings
+- May only be a display name
+- Does not need login access
 
 ## Business Rule
 
 A competition can contain participants that are:
 
-* manually created by organizer
-* registered by authenticated users
-* imported from a list
-* linked to user accounts later
+- manually created by organizer
+- registered by authenticated users
+- imported from a list
+- linked to user accounts later

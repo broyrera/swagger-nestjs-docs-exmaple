@@ -72,16 +72,16 @@ export function RegisterApiDocs() {
 
 Each endpoint should document:
 
-* operation summary
-* operation description when business rules are important
-* request body
-* path parameters
-* query parameters
-* success response
-* error responses
-* authentication requirement
-* authorization requirement
-* example values when helpful
+- operation summary
+- operation description when business rules are important
+- request body
+- path parameters
+- query parameters
+- success response
+- error responses
+- authentication requirement
+- authorization requirement
+- example values when helpful
 
 ## Summary Style
 
@@ -126,9 +126,9 @@ Use `@ApiPropertyOptional` for optional fields.
 
 Every important field should include:
 
-* description
-* example
-* enum if applicable
+- description
+- example
+- enum if applicable
 
 Example:
 
@@ -197,7 +197,7 @@ ApiSuccessResponse({
   status: 201,
   description: 'User registered successfully',
   dataType: RegisterResponseDataDto,
-})
+});
 ```
 
 Avoid repeating full response wrappers in every module DTO.
@@ -227,7 +227,7 @@ ApiSuccessResponse({
   status: 201,
   description: 'User registered successfully',
   dataType: RegisterResponseDataDto,
-})
+});
 ```
 
 This keeps controller documentation clean and keeps DTOs focused.
@@ -238,11 +238,11 @@ Document expected error responses.
 
 Common errors:
 
-* `400 Bad Request`
-* `401 Unauthorized`
-* `403 Forbidden`
-* `404 Not Found`
-* `409 Conflict`
+- `400 Bad Request`
+- `401 Unauthorized`
+- `403 Forbidden`
+- `404 Not Found`
+- `409 Conflict`
 
 ## Auth Documentation
 
@@ -276,23 +276,23 @@ Use this naming pattern:
 Examples:
 
 ```ts
-RegisterApiDocs
-LoginApiDocs
-CreateCompetitionApiDocs
-PublishCompetitionApiDocs
-InputMatchScoreApiDocs
-GetStandingsApiDocs
+RegisterApiDocs;
+LoginApiDocs;
+CreateCompetitionApiDocs;
+PublishCompetitionApiDocs;
+InputMatchScoreApiDocs;
+GetStandingsApiDocs;
 ```
 
 ## Anti-Patterns
 
 Avoid:
 
-* putting all Swagger decorators directly in controller
-* using raw entity as response schema
-* returning password or internal fields
-* using vague DTO names like `DataDto`
-* using undocumented enums
-* using `any` response
-* documenting only happy path
-* forgetting `401` and `403` for protected endpoints
+- putting all Swagger decorators directly in controller
+- using raw entity as response schema
+- returning password or internal fields
+- using vague DTO names like `DataDto`
+- using undocumented enums
+- using `any` response
+- documenting only happy path
+- forgetting `401` and `403` for protected endpoints

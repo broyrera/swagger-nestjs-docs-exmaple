@@ -32,12 +32,12 @@ so that I can create organizations and manage competitions.
 
 Acceptance criteria:
 
-* User can register with name, email, and password.
-* Email must be unique.
-* Password must follow validation rules.
-* API returns user profile without password.
-* API documents validation error.
-* API documents conflict error when email already exists.
+- User can register with name, email, and password.
+- Email must be unique.
+- Password must follow validation rules.
+- API returns user profile without password.
+- API documents validation error.
+- API documents conflict error when email already exists.
 
 ### Story 1.2: User can login
 
@@ -47,10 +47,10 @@ so that I can access protected resources.
 
 Acceptance criteria:
 
-* User can login with email and password.
-* API returns access token and user profile.
-* Invalid credentials return `401 Unauthorized`.
-* Swagger documents the request body and success response.
+- User can login with email and password.
+- API returns access token and user profile.
+- Invalid credentials return `401 Unauthorized`.
+- Swagger documents the request body and success response.
 
 ### Story 1.3: User can view current profile
 
@@ -60,35 +60,35 @@ so that I can confirm which account is active.
 
 Acceptance criteria:
 
-* Endpoint requires Bearer token.
-* API returns current authenticated user.
-* Missing or invalid token returns `401 Unauthorized`.
-* Swagger documents Bearer authentication.
+- Endpoint requires Bearer token.
+- API returns current authenticated user.
+- Missing or invalid token returns `401 Unauthorized`.
+- Swagger documents Bearer authentication.
 
 ## API Contract Deliverables
 
-* Request DTO for register
-* Response DTO for register
-* Request DTO for login
-* Response DTO for login
-* Response DTO for current user
-* Error response DTO
-* Reusable Swagger decorators for auth endpoints
+- Request DTO for register
+- Response DTO for register
+- Request DTO for login
+- Response DTO for login
+- Response DTO for current user
+- Error response DTO
+- Reusable Swagger decorators for auth endpoints
 
 ## Swagger Learning Goals
 
 By the end of this sprint, the project should demonstrate:
 
-* `@ApiTags`
-* `@ApiOperation`
-* `@ApiBody`
-* `@ApiCreatedResponse`
-* `@ApiOkResponse`
-* `@ApiBadRequestResponse`
-* `@ApiUnauthorizedResponse`
-* `@ApiConflictResponse`
-* `@ApiBearerAuth`
-* Reusable documentation decorators using `applyDecorators`
+- `@ApiTags`
+- `@ApiOperation`
+- `@ApiBody`
+- `@ApiCreatedResponse`
+- `@ApiOkResponse`
+- `@ApiBadRequestResponse`
+- `@ApiUnauthorizedResponse`
+- `@ApiConflictResponse`
+- `@ApiBearerAuth`
+- Reusable documentation decorators using `applyDecorators`
 
 ## Implementation Rules
 
@@ -122,10 +122,10 @@ register(@Body() dto: RegisterRequestDto) {
 
 Sprint 1 is complete when:
 
-* `auth-contract.md` is documented.
-* Auth request and response DTOs are created.
-* Auth Swagger decorators are extracted into `auth.swagger.ts`.
-* Controller uses reusable docs decorators.
-* Swagger UI clearly shows register, login, and me endpoints.
-* Controller is still readable.
-* Error responses are documented.
+- `auth-contract.md` is documented.
+- Auth request and response DTOs are created.
+- Auth Swagger decorators are extracted into `auth.swagger.ts`.
+- Controller uses reusable docs decorators.
+- Swagger UI clearly shows register, login, and me endpoints.
+- Controller is still readable.
+- Error responses are documented.

@@ -195,14 +195,14 @@ ApiSuccessResponse({
   status: 200,
   description: 'User logged in successfully',
   dataType: LoginResponseDataDto,
-})
+});
 ```
 
 This generates a Swagger response schema with:
 
-* `success`
-* `message`
-* `data`
+- `success`
+- `message`
+- `data`
 
 while keeping module-specific DTOs focused only on the actual response payload.
 
@@ -222,14 +222,14 @@ Preferred pattern:
 ApiSuccessResponse({
   description: 'User logged in successfully',
   dataType: LoginResponseDataDto,
-})
+});
 ```
 
 The reusable decorator internally uses:
 
-* `ApiExtraModels`
-* `getSchemaPath`
-* `allOf`
+- `ApiExtraModels`
+- `getSchemaPath`
+- `allOf`
 
 to produce a clear OpenAPI schema.
 

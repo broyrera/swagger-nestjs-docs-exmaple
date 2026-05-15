@@ -98,9 +98,9 @@ Sprint 1: Authentication API Contract
 
 Sprint 1 focuses on:
 
-* `POST /api/v1/auth/register`
-* `POST /api/v1/auth/login`
-* `GET /api/v1/auth/me`
+- `POST /api/v1/auth/register`
+- `POST /api/v1/auth/login`
+- `GET /api/v1/auth/me`
 
 ## API Contract Source of Truth
 
@@ -132,8 +132,8 @@ src/modules/auth/docs/auth.swagger.ts
 
 Current status:
 
-* Product documentation: started
-* Domain documentation: started
-* Scrum documentation: started
-* API contract standard: started
-* NestJS implementation: not started yet
+- Product documentation: started
+- Domain documentation: started
+- Scrum documentation: started
+- API contract standard: started
+- NestJS implementation: not started yet

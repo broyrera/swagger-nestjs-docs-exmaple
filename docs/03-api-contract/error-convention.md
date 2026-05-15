@@ -146,13 +146,13 @@ Every endpoint must document expected error responses in Swagger.
 
 Protected endpoints should usually document:
 
-* `401 Unauthorized`
-* `403 Forbidden`
+- `401 Unauthorized`
+- `403 Forbidden`
 
 Resource lookup endpoints should usually document:
 
-* `404 Not Found`
+- `404 Not Found`
 
 Lifecycle endpoints should usually document:
 
-* `409 Conflict`
+- `409 Conflict`

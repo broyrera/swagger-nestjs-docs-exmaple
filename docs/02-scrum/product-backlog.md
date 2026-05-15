@@ -40,10 +40,10 @@ so that I can access protected resources.
 
 Acceptance criteria:
 
-* User can login with email and password.
-* API returns access token and user profile.
-* Invalid credentials return standardized error response.
-* Swagger documents `401 Unauthorized`.
+- User can login with email and password.
+- API returns access token and user profile.
+- Invalid credentials return standardized error response.
+- Swagger documents `401 Unauthorized`.
 
 Potential API:
 
@@ -59,9 +59,9 @@ so that I know which account is active.
 
 Acceptance criteria:
 
-* Endpoint requires Bearer token.
-* API returns current authenticated user.
-* Swagger documents auth requirement.
+- Endpoint requires Bearer token.
+- API returns current authenticated user.
+- Swagger documents auth requirement.
 
 Potential API:
 
@@ -81,10 +81,10 @@ so that I can manage competitions under a community, club, school, or office.
 
 Acceptance criteria:
 
-* Authenticated user can create organization.
-* Creator becomes organization owner.
-* Organization name must be unique within reasonable scope.
-* Swagger documents protected endpoint and response.
+- Authenticated user can create organization.
+- Creator becomes organization owner.
+- Organization name must be unique within reasonable scope.
+- Swagger documents protected endpoint and response.
 
 Potential API:
 
@@ -100,10 +100,10 @@ so that other users can help manage competitions.
 
 Acceptance criteria:
 
-* Only authorized users can invite members.
-* Invited member receives organization role.
-* Invalid role returns validation error.
-* Unauthorized user receives `403 Forbidden`.
+- Only authorized users can invite members.
+- Invited member receives organization role.
+- Invalid role returns validation error.
+- Unauthorized user receives `403 Forbidden`.
 
 Potential API:
 
@@ -123,11 +123,11 @@ so that participants, matches, scores, standings, and brackets can be managed.
 
 Acceptance criteria:
 
-* Competition has name, type, format, and visibility.
-* Competition belongs to an organization.
-* Creator becomes competition owner.
-* Competition starts as draft.
-* Swagger documents enum values.
+- Competition has name, type, format, and visibility.
+- Competition belongs to an organization.
+- Creator becomes competition owner.
+- Competition starts as draft.
+- Swagger documents enum values.
 
 Potential API:
 
@@ -143,10 +143,10 @@ so that participants and viewers can access it.
 
 Acceptance criteria:
 
-* Only authorized users can publish.
-* Draft competition can become published.
-* Invalid lifecycle transition returns conflict error.
-* Swagger documents possible `409 Conflict`.
+- Only authorized users can publish.
+- Draft competition can become published.
+- Invalid lifecycle transition returns conflict error.
+- Swagger documents possible `409 Conflict`.
 
 Potential API:
 
@@ -166,10 +166,10 @@ so that a team can join a competition without requiring every player to create a
 
 Acceptance criteria:
 
-* Participant can be created using display name only.
-* Participant does not require user account.
-* Participant type must be `TEAM`.
-* Swagger documents participant model clearly.
+- Participant can be created using display name only.
+- Participant does not require user account.
+- Participant type must be `TEAM`.
+- Swagger documents participant model clearly.
 
 Potential API:
 
@@ -185,9 +185,9 @@ so that a single player can join a competition without needing an account.
 
 Acceptance criteria:
 
-* Participant can be created using display name only.
-* Optional linked user may be supported later.
-* Participant type must be `INDIVIDUAL`.
+- Participant can be created using display name only.
+- Optional linked user may be supported later.
+- Participant type must be `INDIVIDUAL`.
 
 Potential API:
 
@@ -207,10 +207,10 @@ so that informal competitions can be managed flexibly.
 
 Acceptance criteria:
 
-* Match can be created between two participants.
-* Match can have optional schedule.
-* Match starts as scheduled or draft depending on business rule.
-* Swagger documents participant references.
+- Match can be created between two participants.
+- Match can have optional schedule.
+- Match starts as scheduled or draft depending on business rule.
+- Swagger documents participant references.
 
 Potential API:
 
@@ -226,10 +226,10 @@ so that match results and standings can be updated.
 
 Acceptance criteria:
 
-* Only authorized users can input score.
-* Score must match competition scoring rules.
-* Completed match updates standings.
-* Invalid match state returns conflict error.
+- Only authorized users can input score.
+- Score must match competition scoring rules.
+- Completed match updates standings.
+- Invalid match state returns conflict error.
 
 Potential API:
 
@@ -249,9 +249,9 @@ so that I can understand current rankings.
 
 Acceptance criteria:
 
-* Public competition standings can be viewed without login.
-* Private competition standings require access.
-* Response includes rank, participant, played, won, drawn, lost, points, and score stats where applicable.
+- Public competition standings can be viewed without login.
+- Private competition standings require access.
+- Response includes rank, participant, played, won, drawn, lost, points, and score stats where applicable.
 
 Potential API:
 
@@ -267,9 +267,9 @@ so that I can understand knockout progression.
 
 Acceptance criteria:
 
-* Bracket supports non-perfect participant counts.
-* Bracket may include bye rounds.
-* Response structure is documented clearly.
+- Bracket supports non-perfect participant counts.
+- Bracket may include bye rounds.
+- Response structure is documented clearly.
 
 Potential API:
 

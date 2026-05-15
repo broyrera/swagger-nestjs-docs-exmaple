@@ -78,8 +78,8 @@ Response body:
 
 ## Error Responses
 
-* `400 Bad Request`
-* `401 Unauthorized`
+- `400 Bad Request`
+- `401 Unauthorized`
 
 ---
 
@@ -120,7 +120,7 @@ Response body:
 
 ## Error Responses
 
-* `401 Unauthorized`
+- `401 Unauthorized`
 
 ---
 
@@ -167,9 +167,9 @@ Response body:
 
 ## Error Responses
 
-* `401 Unauthorized`
-* `403 Forbidden`
-* `404 Not Found`
+- `401 Unauthorized`
+- `403 Forbidden`
+- `404 Not Found`
 
 ---
 
@@ -189,9 +189,9 @@ Requires Bearer token.
 
 Allowed roles:
 
-* `SUPER_ADMIN`
-* `ORGANIZATION_OWNER`
-* `ORGANIZATION_ADMIN` depending on organization policy
+- `SUPER_ADMIN`
+- `ORGANIZATION_OWNER`
+- `ORGANIZATION_ADMIN` depending on organization policy
 
 ## Path Parameters
 
@@ -250,7 +250,7 @@ Response body:
 
 ## Error Responses
 
-* `400 Bad Request`
-* `401 Unauthorized`
-* `403 Forbidden`
-* `404 Not Found`
+- `400 Bad Request`
+- `401 Unauthorized`
+- `403 Forbidden`
+- `404 Not Found`
