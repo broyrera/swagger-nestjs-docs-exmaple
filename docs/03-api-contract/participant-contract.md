@@ -97,10 +97,10 @@ Requires Bearer token.
 
 Allowed roles:
 
-* `SUPER_ADMIN`
-* `ORGANIZATION_OWNER`
-* `COMPETITION_OWNER`
-* `COMPETITION_ADMIN`
+- `SUPER_ADMIN`
+- `ORGANIZATION_OWNER`
+- `COMPETITION_OWNER`
+- `COMPETITION_ADMIN`
 
 ## Path Parameters
 
@@ -173,11 +173,11 @@ Response body:
 
 ## Error Responses
 
-* `400 Bad Request`
-* `401 Unauthorized`
-* `403 Forbidden`
-* `404 Not Found`
-* `409 Conflict`
+- `400 Bad Request`
+- `401 Unauthorized`
+- `403 Forbidden`
+- `404 Not Found`
+- `409 Conflict`
 
 ---
 
@@ -227,9 +227,9 @@ Response body:
 
 ## Error Responses
 
-* `401 Unauthorized`
-* `403 Forbidden`
-* `404 Not Found`
+- `401 Unauthorized`
+- `403 Forbidden`
+- `404 Not Found`
 
 ---
 
@@ -276,9 +276,9 @@ Response body:
 
 ## Error Responses
 
-* `401 Unauthorized`
-* `403 Forbidden`
-* `404 Not Found`
+- `401 Unauthorized`
+- `403 Forbidden`
+- `404 Not Found`
 
 ---
 
@@ -328,11 +328,11 @@ Response body:
 
 ## Error Responses
 
-* `400 Bad Request`
-* `401 Unauthorized`
-* `403 Forbidden`
-* `404 Not Found`
-* `409 Conflict`
+- `400 Bad Request`
+- `401 Unauthorized`
+- `403 Forbidden`
+- `404 Not Found`
+- `409 Conflict`
 
 ---
 
@@ -375,10 +375,10 @@ Response body:
 
 ## Error Responses
 
-* `401 Unauthorized`
-* `403 Forbidden`
-* `404 Not Found`
-* `409 Conflict`
+- `401 Unauthorized`
+- `403 Forbidden`
+- `404 Not Found`
+- `409 Conflict`
 
 ---
 
@@ -421,10 +421,10 @@ Response body:
 
 ## Error Responses
 
-* `401 Unauthorized`
-* `403 Forbidden`
-* `404 Not Found`
-* `409 Conflict`
+- `401 Unauthorized`
+- `403 Forbidden`
+- `404 Not Found`
+- `409 Conflict`
 
 ---
 
@@ -433,6 +433,8 @@ Response body:
 ## Purpose
 
 Removes a participant.
+
+DELETE here means marking the participant as `REMOVED`, not permanently deleting the participant record.
 
 This action may be blocked if the participant is already used in locked matches.
 
@@ -467,7 +469,7 @@ Response body:
 
 ## Error Responses
 
-* `401 Unauthorized`
-* `403 Forbidden`
-* `404 Not Found`
-* `409 Conflict`
+- `401 Unauthorized`
+- `403 Forbidden`
+- `404 Not Found`
+- `409 Conflict`
