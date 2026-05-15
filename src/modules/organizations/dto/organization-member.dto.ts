@@ -4,7 +4,7 @@ import { OrganizationRole } from './organization-role.enum';
 export class OrganizationMemberDto {
   @ApiProperty({
     description: 'Unique organization member identifier.',
-    example: 'mem_123',
+    example: 'om_V1StGXR8_Z5jdHi6B-myT',
   })
   id: string;
 

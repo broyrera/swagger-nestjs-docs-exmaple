@@ -66,7 +66,7 @@ Response body:
   "success": true,
   "message": "Organization created successfully",
   "data": {
-    "id": "org_123",
+    "id": "org_V1StGXR8_Z5jdHi6B-myT",
     "name": "Garuda Sports Community",
     "description": "Community for sport and esport events.",
     "currentUserRole": "ORGANIZATION_OWNER"
@@ -107,7 +107,7 @@ Response body:
   "message": "Organizations retrieved successfully",
   "data": [
     {
-      "id": "org_123",
+      "id": "org_V1StGXR8_Z5jdHi6B-myT",
       "name": "Garuda Sports Community",
       "description": "Community for sport and esport events.",
       "currentUserRole": "ORGANIZATION_OWNER"
@@ -115,6 +115,8 @@ Response body:
   ]
 }
 ```
+
+> `currentUserRole` is `null` when a `SUPER_ADMIN` views an organization they are not a member of.
 
 ## Error Responses
 
@@ -153,7 +155,7 @@ Response body:
   "success": true,
   "message": "Organization retrieved successfully",
   "data": {
-    "id": "org_123",
+    "id": "org_V1StGXR8_Z5jdHi6B-myT",
     "name": "Garuda Sports Community",
     "description": "Community for sport and esport events.",
     "currentUserRole": "ORGANIZATION_OWNER"
@@ -234,8 +236,8 @@ Response body:
   "success": true,
   "message": "Organization member added successfully",
   "data": {
-    "id": "mem_123",
-    "userId": "usr_456",
+    "id": "om_V1StGXR8_Z5jdHi6B-myT",
+    "userId": "usr_KJpmZTrK_8bdAhVxsE2nQ",
     "email": "member@example.com",
     "role": "ORGANIZATION_ADMIN"
   }

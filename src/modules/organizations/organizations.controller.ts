@@ -1,5 +1,7 @@
 import { Body, Controller, Get, Param, Post } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
+import { CurrentUser } from '../../common/auth/current-user.decorator';
+import { AuthenticatedUser } from '../../common/auth/jwt-payload.type';
 import {
   AddOrganizationMemberApiDocs,
   CreateOrganizationApiDocs,
@@ -17,28 +19,39 @@ export class OrganizationsController {
 
   @Post()
   @CreateOrganizationApiDocs()
-  create(@Body() dto: CreateOrganizationRequestDto) {
-    return this.organizationsService.create(dto);
+  create(
+    @CurrentUser() currentUser: AuthenticatedUser,
+    @Body() dto: CreateOrganizationRequestDto,
+  ) {
+    return this.organizationsService.create(currentUser, dto);
   }
 
   @Get()
   @ListOrganizationsApiDocs()
-  findAll() {
-    return this.organizationsService.findAll();
+  findAll(@CurrentUser() currentUser: AuthenticatedUser) {
+    return this.organizationsService.findAll(currentUser);
   }
 
   @Get(':organizationId')
   @GetOrganizationApiDocs()
-  findOne(@Param('organizationId') organizationId: string) {
-    return this.organizationsService.findOne(organizationId);
+  findOne(
+    @CurrentUser() currentUser: AuthenticatedUser,
+    @Param('organizationId') organizationId: string,
+  ) {
+    return this.organizationsService.findOne(currentUser, organizationId);
   }
 
   @Post(':organizationId/members')
   @AddOrganizationMemberApiDocs()
   addMember(
+    @CurrentUser() currentUser: AuthenticatedUser,
     @Param('organizationId') organizationId: string,
     @Body() dto: AddOrganizationMemberRequestDto,
   ) {
-    return this.organizationsService.addMember(organizationId, dto);
+    return this.organizationsService.addMember(
+      currentUser,
+      organizationId,
+      dto,
+    );
   }
 }

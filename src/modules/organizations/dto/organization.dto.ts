@@ -20,10 +20,12 @@ export class OrganizationDto {
   })
   description?: string;
 
-  @ApiProperty({
-    description: 'Current authenticated user role in this organization.',
+  @ApiPropertyOptional({
+    description:
+      'Current authenticated user role in this organization. Null when the requester is a SUPER_ADMIN viewing an organization they are not a member of.',
     enum: OrganizationRole,
     example: OrganizationRole.OWNER,
+    nullable: true,
   })
-  currentUserRole: OrganizationRole;
+  currentUserRole: OrganizationRole | null;
 }
