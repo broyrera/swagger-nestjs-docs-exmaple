@@ -8,6 +8,8 @@ import {
   Query,
 } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
+import { CurrentUser } from '../../common/auth/current-user.decorator';
+import { AuthenticatedUser } from '../../common/auth/jwt-payload.type';
 import {
   ArchiveCompetitionApiDocs,
   CreateCompetitionApiDocs,
@@ -28,40 +30,56 @@ export class CompetitionsController {
 
   @Post()
   @CreateCompetitionApiDocs()
-  create(@Body() dto: CreateCompetitionRequestDto) {
-    return this.competitionsService.create(dto);
+  create(
+    @CurrentUser() currentUser: AuthenticatedUser,
+    @Body() dto: CreateCompetitionRequestDto,
+  ) {
+    return this.competitionsService.create(currentUser, dto);
   }
 
   @Get()
   @ListCompetitionsApiDocs()
-  findAll(@Query() query: ListCompetitionsQueryDto) {
-    return this.competitionsService.findAll(query);
+  findAll(
+    @CurrentUser() currentUser: AuthenticatedUser,
+    @Query() query: ListCompetitionsQueryDto,
+  ) {
+    return this.competitionsService.findAll(currentUser, query);
   }
 
   @Get(':competitionId')
   @GetCompetitionApiDocs()
-  findOne(@Param('competitionId') competitionId: string) {
-    return this.competitionsService.findOne(competitionId);
+  findOne(
+    @CurrentUser() currentUser: AuthenticatedUser,
+    @Param('competitionId') competitionId: string,
+  ) {
+    return this.competitionsService.findOne(currentUser, competitionId);
   }
 
   @Patch(':competitionId')
   @UpdateCompetitionApiDocs()
   update(
+    @CurrentUser() currentUser: AuthenticatedUser,
     @Param('competitionId') competitionId: string,
     @Body() dto: UpdateCompetitionRequestDto,
   ) {
-    return this.competitionsService.update(competitionId, dto);
+    return this.competitionsService.update(currentUser, competitionId, dto);
   }
 
   @Patch(':competitionId/publish')
   @PublishCompetitionApiDocs()
-  publish(@Param('competitionId') competitionId: string) {
-    return this.competitionsService.publish(competitionId);
+  publish(
+    @CurrentUser() currentUser: AuthenticatedUser,
+    @Param('competitionId') competitionId: string,
+  ) {
+    return this.competitionsService.publish(currentUser, competitionId);
   }
 
   @Patch(':competitionId/archive')
   @ArchiveCompetitionApiDocs()
-  archive(@Param('competitionId') competitionId: string) {
-    return this.competitionsService.archive(competitionId);
+  archive(
+    @CurrentUser() currentUser: AuthenticatedUser,
+    @Param('competitionId') competitionId: string,
+  ) {
+    return this.competitionsService.archive(currentUser, competitionId);
   }
 }
