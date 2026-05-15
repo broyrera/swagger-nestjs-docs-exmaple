@@ -18,10 +18,12 @@ export function ApiValidationErrorResponse() {
   );
 }
 
-export function ApiAuthErrorResponses() {
+export function ApiAuthErrorResponses(
+  description = 'Authentication is required or token is invalid',
+) {
   return applyDecorators(
     ApiUnauthorizedResponse({
-      description: 'Authentication is required or token is invalid',
+      description,
       type: ErrorResponseDto,
     }),
   );

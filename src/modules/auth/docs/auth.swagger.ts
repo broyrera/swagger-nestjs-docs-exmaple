@@ -1,14 +1,11 @@
 import { applyDecorators } from '@nestjs/common';
+import { ApiBearerAuth, ApiBody, ApiOperation } from '@nestjs/swagger';
 import {
-  ApiBearerAuth,
-  ApiBody,
-  ApiConflictResponse,
-  ApiOperation,
-  ApiUnauthorizedResponse,
-} from '@nestjs/swagger';
-import { ApiValidationErrorResponse } from '../../../common/decorators/api-error-responses.decorator';
+  ApiAuthErrorResponses,
+  ApiConflictErrorResponse,
+  ApiValidationErrorResponse,
+} from '../../../common/decorators/api-error-responses.decorator';
 import { ApiSuccessResponse } from '../../../common/decorators/api-success-response.decorator';
-import { ErrorResponseDto } from '../../../common/dto/error-response.dto';
 import { LoginRequestDto } from '../dto/login-request.dto';
 import { LoginResponseDataDto } from '../dto/login-response.dto';
 import { RegisterRequestDto } from '../dto/register-request.dto';
@@ -28,10 +25,7 @@ export function RegisterApiDocs() {
       dataType: UserProfileDto,
     }),
     ApiValidationErrorResponse(),
-    ApiConflictResponse({
-      description: 'Email already exists',
-      type: ErrorResponseDto,
-    }),
+    ApiConflictErrorResponse('Email already exists'),
   );
 }
 
@@ -48,10 +42,7 @@ export function LoginApiDocs() {
       dataType: LoginResponseDataDto,
     }),
     ApiValidationErrorResponse(),
-    ApiUnauthorizedResponse({
-      description: 'Invalid email or password',
-      type: ErrorResponseDto,
-    }),
+    ApiAuthErrorResponses('Invalid email or password'),
   );
 }
 
@@ -67,9 +58,6 @@ export function GetCurrentUserApiDocs() {
       description: 'Current user retrieved successfully',
       dataType: UserProfileDto,
     }),
-    ApiUnauthorizedResponse({
-      description: 'Authentication is required or token is invalid',
-      type: ErrorResponseDto,
-    }),
+    ApiAuthErrorResponses(),
   );
 }

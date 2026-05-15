@@ -2,19 +2,18 @@ import { applyDecorators } from '@nestjs/common';
 import {
   ApiBearerAuth,
   ApiBody,
-  ApiConflictResponse,
   ApiOperation,
   ApiParam,
   ApiQuery,
 } from '@nestjs/swagger';
 import {
   ApiAuthErrorResponses,
+  ApiConflictErrorResponse,
   ApiForbiddenErrorResponse,
   ApiNotFoundErrorResponse,
   ApiValidationErrorResponse,
 } from '../../../common/decorators/api-error-responses.decorator';
 import { ApiSuccessResponse } from '../../../common/decorators/api-success-response.decorator';
-import { ErrorResponseDto } from '../../../common/dto/error-response.dto';
 import { CompetitionDto } from '../dto/competition.dto';
 import { CompetitionFormat } from '../dto/competition-format.enum';
 import { CompetitionStatus } from '../dto/competition-status.enum';
@@ -110,10 +109,7 @@ export function UpdateCompetitionApiDocs() {
     ApiAuthErrorResponses(),
     ApiForbiddenErrorResponse(),
     ApiNotFoundErrorResponse('Competition'),
-    ApiConflictResponse({
-      description: 'Invalid competition lifecycle transition',
-      type: ErrorResponseDto,
-    }),
+    ApiConflictErrorResponse('Invalid competition lifecycle transition'),
   );
 }
 
@@ -133,10 +129,7 @@ export function PublishCompetitionApiDocs() {
     ApiAuthErrorResponses(),
     ApiForbiddenErrorResponse(),
     ApiNotFoundErrorResponse('Competition'),
-    ApiConflictResponse({
-      description: 'Invalid competition lifecycle transition',
-      type: ErrorResponseDto,
-    }),
+    ApiConflictErrorResponse('Invalid competition lifecycle transition'),
   );
 }
 
@@ -156,9 +149,6 @@ export function ArchiveCompetitionApiDocs() {
     ApiAuthErrorResponses(),
     ApiForbiddenErrorResponse(),
     ApiNotFoundErrorResponse('Competition'),
-    ApiConflictResponse({
-      description: 'Invalid competition lifecycle transition',
-      type: ErrorResponseDto,
-    }),
+    ApiConflictErrorResponse('Invalid competition lifecycle transition'),
   );
 }
