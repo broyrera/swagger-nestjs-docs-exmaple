@@ -1,5 +1,6 @@
 import { Module } from '@nestjs/common';
 import { AuthModule } from './modules/auth/auth.module';
+import { BracketsModule } from './modules/brackets/brackets.module';
 import { CompetitionsModule } from './modules/competitions/competitions.module';
 import { MatchesModule } from './modules/matches/matches.module';
 import { OrganizationsModule } from './modules/organizations/organizations.module';
@@ -14,6 +15,7 @@ import { StandingsModule } from './modules/standings/standings.module';
     ParticipantsModule,
     MatchesModule,
     StandingsModule,
+    BracketsModule,
   ],
   controllers: [],
   providers: [],
